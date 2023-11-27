@@ -15,24 +15,45 @@ function divide(num1, num2) {
 };
 
 let num1 = 0;
-let num2 = 0;
+let num2;
 let operatorValue = null;
 let displayValue = '';
 let resultValue = null;
 
+let decimalSavingValue;
+
 function operate(num1, operatorValue, num2) {
+    if(operatorValue == '÷' && num2 == 0) return resultValue = "You can't divide by zero~";
+    if(num1 == 0 && operatorValue == null && isNaN(num2)) return resultValue = 0;
+    if(operatorValue == null && isNaN(num2) || num2 == 0 ) return resultValue = num1;
     switch (operatorValue) {
         case '+':
             resultValue = add(num1, num2)
+            if(resultValue.toString().split('').includes('.')) {
+                decimalSavingValue = Math.round(resultValue * 100) / 100;
+                resultValue = `≈${decimalSavingValue}`;
+            }
             break;
         case '-':
             resultValue = substract(num1, num2)
+            if(resultValue.toString().split('').includes('.')) {
+                decimalSavingValue = Math.round(resultValue * 100) / 100;
+                resultValue = `≈${decimalSavingValue}`;
+            }
             break;
         case '*':
             resultValue = multiply(num1, num2)
+            if(resultValue.toString().split('').includes('.')) {
+                decimalSavingValue = Math.round(resultValue * 100) / 100;
+                resultValue = `≈${decimalSavingValue}`;
+            }
             break;
         case '÷':
             resultValue = divide(num1, num2)
+            if(resultValue.toString().split('').includes('.')) {
+                decimalSavingValue = Math.round(resultValue * 100) / 100;
+                resultValue = `≈${decimalSavingValue}`;
+            }
             break;
     };
 };
@@ -40,6 +61,7 @@ function operate(num1, operatorValue, num2) {
 const outputField = document.querySelector('.display-text')
 
 function populateDisplay(valueToPrint) {
+    if(num1 == 0 && !displayValue) displayValue = 0;
     if(valueToPrint == '÷' || valueToPrint == '*' || valueToPrint == '-' || valueToPrint == '+') {
         if(!operatorValue) displayValue += valueToPrint;
         else {
@@ -86,42 +108,9 @@ equalButton.addEventListener('click', () => {
     operate(+num1, operatorValue, +num2);
     displayValue = '';
     populateDisplay(resultValue);
-    num1 = resultValue;
+    num1 = decimalSavingValue ? decimalSavingValue : 
+           resultValue == "You can't divide by zero~" ? 0 : resultValue;
     operatorValue = null;
     num2 = 0;
     resultValue = null;
 })
-        
-
-
-// for(let operator of operators) {
-//     operator.addEventListener('click', () => {
-//        populateDisplay(operator.textContent);
-//        for(let digit of digits) {
-//         digit.addEventListener('click', () => populateDisplay(digit.textContent))
-//         }
-//     })
-// }
-
-
-// function populateDisplay(valueToPrint, valueToStore) {
-//     if(!displayValue) displayValue = valueToPrint;
-//     else displayValue += valueToPrint;
-//     switch (valueToStore) {
-//         case num1:
-//             if(!num1) num1 = valueToPrint; 
-//             else num1 += valueToPrint;
-//             break;
-
-//         case num2:
-//             if(!num2) num2 = valueToPrint; 
-//             else num2 += valueToPrint;
-//             break;
-
-//         case operatorValue:
-//             if(!operatorValue) operatorValue = valueToPrint; 
-//             else operatorValue += valueToPrint;
-//             break;
-//     }
-//     outputField.textContent = `${displayValue}`;
-// }
