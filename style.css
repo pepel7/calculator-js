@@ -63,3 +63,13 @@ button.equal:hover {
 button.equal {
     background: #ffc27d;
 }
+
+button.backspace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.backspace img {
+    width: 30px;
+}
