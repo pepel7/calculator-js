@@ -49,6 +49,7 @@ button {
 
 .display-text {
     font-size: 35px;
+    font-weight: 600;
 }
 
 button:hover {

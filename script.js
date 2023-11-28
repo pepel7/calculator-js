@@ -15,7 +15,7 @@ function divide(num1, num2) {
 };
 
 let num1 = 0;
-let num2;
+let num2 = 0;
 let operatorValue = null;
 let displayValue = '';
 let resultValue = null;
@@ -24,8 +24,8 @@ let decimalSavingValue;
 
 function operate(num1, operatorValue, num2) {
     if(operatorValue == '÷' && num2 == 0) return resultValue = "You can't divide by zero~";
-    if(num1 == 0 && operatorValue == null && isNaN(num2)) return resultValue = 0;
-    if(operatorValue == null && isNaN(num2) || num2 == 0 ) return resultValue = num1;
+    if(num1 == 0 && operatorValue == null && num2 == 0) return resultValue = 0;
+    if(operatorValue == null && num2 == 0 ) return resultValue = num1;
     switch (operatorValue) {
         case '+':
             resultValue = add(num1, num2)
@@ -58,7 +58,7 @@ function operate(num1, operatorValue, num2) {
     };
 };
 
-const outputField = document.querySelector('.display-text')
+const outputField = document.querySelector('.display-text');
 
 function populateDisplay(valueToPrint) {
     if(num1 == 0 && !displayValue) displayValue = 0;
@@ -77,11 +77,11 @@ function populateDisplay(valueToPrint) {
         else displayValue += valueToPrint;
     } 
     outputField.textContent = `${displayValue}`;
-}
+};
 
-const digits = document.querySelectorAll('.digit')
-const operators = document.querySelectorAll('.operator')
-const equalButton = document.querySelector('.equal')
+const digits = document.querySelectorAll('.digit');
+const operators = document.querySelectorAll('.operator');
+const equalButton = document.querySelector('.equal');
 
 let clickEvent = new Event('click');
 
@@ -93,6 +93,10 @@ for(let digit of digits) {
         } else {
             populateDisplay(digit.textContent)
             num2 = !num2 ? digit.textContent : num2 + digit.textContent;
+        };
+
+        if( operatorValue && !(num2.toString().split('').includes('.')) ) {
+            dotBtn.disabled = false;
         };
     });
 };
@@ -112,5 +116,18 @@ equalButton.addEventListener('click', () => {
            resultValue == "You can't divide by zero~" ? 0 : resultValue;
     operatorValue = null;
     num2 = 0;
+    if(!num1.toString().split('').includes('.')) dotBtn.disabled = false;
+    else dotBtn.disabled = true;
     resultValue = null;
-})
+});
+
+const dotBtn = document.querySelector('.dot');
+
+dotBtn.addEventListener('click', () => {
+    if (num2) num2 += '.';
+    else if (num1 && !operatorValue) {
+        num1 += '.';
+    } else return;
+    populateDisplay('.');
+    dotBtn.disabled = true;
+});
