@@ -121,6 +121,20 @@ equalButton.addEventListener('click', () => {
     resultValue = null;
 });
 
+const backspaceBtn = document.querySelector('.backspace');
+
+backspaceBtn.addEventListener('click', () => {
+    if(!operatorValue) {
+        num1 = num1.substring(0, num1.length - 1);
+    } else if (operatorValue && !num2) {
+        operatorValue = operatorValue.substring(0, operatorValue.length - 1);
+    } else {
+        num2 = num2.substring(0, num2.length - 1);
+    };
+    displayValue = displayValue.substring(0, displayValue.length - 1);
+    populateDisplay('');
+});
+
 const dotBtn = document.querySelector('.dot');
 
 dotBtn.addEventListener('click', () => {
