@@ -149,6 +149,18 @@ clearElementBtn.addEventListener('click', () => {
     populateDisplay('');
 });
 
+const clearAllBtn = document.querySelector('.clear-all');
+
+clearAllBtn.addEventListener('click', () => {
+    displayValue = '';
+    populateDisplay('');
+    num1 = 0;
+    operatorValue = null;
+    num2 = 0;
+    dotBtn.disabled = false;
+    resultValue = null;
+});
+
 const dotBtn = document.querySelector('.dot');
 
 dotBtn.addEventListener('click', () => {
