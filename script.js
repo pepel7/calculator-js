@@ -135,6 +135,20 @@ backspaceBtn.addEventListener('click', () => {
     populateDisplay('');
 });
 
+const clearElementBtn = document.querySelector('.clear-element');
+
+clearElementBtn.addEventListener('click', () => {
+    if(!operatorValue) {
+        num1 = 0;
+        displayValue = '';
+    } else if (operatorValue && !num2) return;
+    else {
+        num2 = 0;
+        displayValue = displayValue.split(operatorValue)[0] + operatorValue;
+    }
+    populateDisplay('');
+});
+
 const dotBtn = document.querySelector('.dot');
 
 dotBtn.addEventListener('click', () => {
