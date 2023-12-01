@@ -222,7 +222,7 @@ document.body.addEventListener('keydown', (event) => {
 });
 
 document.body.addEventListener('keydown', (event) => {
-    if(event.key != 'Backspace') return;
+    if(event.key != '=' && event.key != 'Enter') return;
     pressEqualButton();
 });
 
