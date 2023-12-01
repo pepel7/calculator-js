@@ -33,39 +33,19 @@ function operate(num1, operatorValue, num2) {
     switch (operatorValue) {
         case '+':
             resultValue = add(num1, num2);
-            if(resultValue.toString().split('').includes('.')) {
-                if(findApproximatelyOrNot(resultValue)) {
-                    decimalSavingValue = Math.round(resultValue * 100) / 100;
-                    resultValue = `≈${decimalSavingValue}`;
-                };
-            }
+            resultValue = Math.round(resultValue * 1000) / 1000;
             break;
         case '-':
             resultValue = substract(num1, num2);
-            if(resultValue.toString().split('').includes('.')) {
-                if(findApproximatelyOrNot(resultValue)) {
-                    decimalSavingValue = Math.round(resultValue * 100) / 100;
-                    resultValue = `≈${decimalSavingValue}`;
-                };
-            }
+            resultValue = Math.round(resultValue * 1000) / 1000;
             break;
         case '*':
             resultValue = multiply(num1, num2);
-            if(resultValue.toString().split('').includes('.')) {
-                if(findApproximatelyOrNot(resultValue)) {
-                    decimalSavingValue = Math.round(resultValue * 100) / 100;
-                    resultValue = `≈${decimalSavingValue}`;
-                };
-            }
+            resultValue = Math.round(resultValue * 1000) / 1000;
             break;
         case '÷':
             resultValue = divide(num1, num2);
-            if(resultValue.toString().split('').includes('.')) {
-                if(findApproximatelyOrNot(resultValue)) {
-                    decimalSavingValue = Math.round(resultValue * 100) / 100;
-                    resultValue = `≈${decimalSavingValue}`;
-                };
-            }
+            resultValue = Math.round(resultValue * 1000) / 1000;
             break;
     };
 };
