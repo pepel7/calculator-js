@@ -84,6 +84,15 @@ function populateDisplay(valueToPrint) {
             displayValue = displayValue.substring(0, displayValue.length - 1);
             displayValue += valueToPrint;
         }
+    } else if(valueToPrint == 'reverse the sign!') {
+            if(Math.sign(num1 ) === -1) displayValue = `-${displayValue}`;
+            if(Math.sign(num1 ) === 1) displayValue = `${displayValue}`;
+            if(Math.sign(num2) === -1) {
+                displayValue = `${num1}${operatorValue}(${num2})`;
+            };
+            if(Math.sign(num2) === 1) {
+                displayValue = `${num1}${operatorValue}${num2}`;
+            };
     } else {
         if(displayValue == '0') displayValue = valueToPrint;
         else displayValue += valueToPrint;
@@ -189,6 +198,18 @@ dotBtn.addEventListener('click', () => {
     dotBtn.disabled = true;
 });
 
+const changeSignBtn = document.querySelector('.change-sign')
+
+changeSignBtn.addEventListener('click', () => {
+    if(!operatorValue) {
+        num1 *= -1;
+    } else if (operatorValue && !num2) return;
+    else {
+        num2 *= -1;
+    }
+    populateDisplay('reverse the sign!');
+})
+
 //---------------------
 //      Keyboard
 //---------------------
@@ -214,10 +235,10 @@ document.body.addEventListener('keydown', (event) => {
         if(event.key == '/') {
             populateDisplay('÷');
             operatorValue = '÷';
-            return
+        } else {
+            populateDisplay(event.key);
+            operatorValue = event.key;
         }
-        populateDisplay(event.key);
-        operatorValue = event.key;
     }
 });
 
